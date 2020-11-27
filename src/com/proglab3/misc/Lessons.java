@@ -1,4 +1,4 @@
-package com.proglab3;
+package com.proglab3.misc;
 
 import com.proglab3.impl.InstanceChecker;
 
