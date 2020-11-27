@@ -6,7 +6,7 @@ public class Window {
     private boolean isOpened = false;
 
     public boolean isOpened() {
-        System.out.printf("Окно %s", isOpened? "открыто": "закрыто");
+        System.out.printf("Окно %s", isOpened ? "открыто" : "закрыто");
         System.out.println();
         return isOpened;
     }
