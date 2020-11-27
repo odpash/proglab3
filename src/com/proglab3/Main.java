@@ -2,6 +2,7 @@ package com.proglab3;
 
 import com.proglab3.entity.Baby;
 import com.proglab3.entity.Carlson;
+import com.proglab3.impl.ReasonToCry;
 import com.proglab3.place.Room;
 import com.proglab3.place.School;
 
@@ -17,13 +18,18 @@ public class Main {
         carlson.flyAway();
         Room room = new Room(baby);
         //room.setOwner(carlson);
-
         baby.run(room);
-        baby.openWindow();
+
+        if (!room.getWindow().isOpened())
+            baby.openWindowInRoom(room);
         baby.think(true, carlson);
 
-        String reasonToCry = String.format("%s не увидит %s", baby.getName(), carlson.decline(WordCase.ACCUSATIVE));
-        baby.cry(true, false, reasonToCry);
+        baby.cry(true, false, new ReasonToCry() {
+            @Override
+            public String reasonToCry() {
+                return String.format("%s больше не увидит %s", baby.getName(), carlson.getName());
+            }
+        });
 
         School school = new School();
         Lessons lessons = new Lessons();
