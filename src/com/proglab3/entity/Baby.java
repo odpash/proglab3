@@ -1,10 +1,15 @@
 package com.proglab3.entity;
 
-import com.proglab3.impl.ReasonToCry;
+import com.proglab3.impl.Cryable;
 import com.proglab3.place.Place;
 import com.proglab3.place.Room;
 
-public class Baby extends Entity {
+import java.util.Objects;
+
+public class Baby extends Entity implements Cryable {
+
+    private boolean criesLoud = true;
+    private boolean criesAfterCovering = true;
 
     public void run(Place place) {
         System.out.print(getName() + " помчался в ");
@@ -12,6 +17,7 @@ public class Baby extends Entity {
             System.out.println("его " + place.getName());
         else
             System.out.println(place.getName() + " " + place.getOwner().getName());
+        setPlace(place);
     }
 
     public void openWindowInRoom(Room room) {
@@ -25,19 +31,20 @@ public class Baby extends Entity {
         System.out.println(getName() + " думал о " + about.getName());
     }
 
-    public void cry(boolean covering, boolean loud, ReasonToCry reasonToCry) {
-        if (covering)
-            System.out.print("Накрывшись одеялом, ");
+    @Override
+    public void cry(String reason) {
+        if (criesAfterCovering)
+            System.out.println("Накрышись одеялом, ");
 
         System.out.print(getName() + " ");
-        if (loud)
+        if (criesLoud)
             System.out.print("громко плакал");
         else
             System.out.print("тихо плакал");
 
-        if (reasonToCry != null) {
+        if (reason != null) {
             System.out.print(" от мысли, что ");
-            System.out.println(reasonToCry.reasonToCry());
+            System.out.println(reason);
         }
     }
 
@@ -57,12 +64,16 @@ public class Baby extends Entity {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Baby baby = (Baby) o;
+        return place.equals(baby.place) && criesLoud == baby.criesLoud &&
+                criesAfterCovering == baby.criesAfterCovering;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(place, criesLoud, criesAfterCovering);
     }
 }
