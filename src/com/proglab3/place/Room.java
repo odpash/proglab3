@@ -1,6 +1,6 @@
 package com.proglab3.place;
 
-import com.proglab3.Window;
+import com.proglab3.misc.Window;
 import com.proglab3.entity.Entity;
 
 import java.util.Objects;

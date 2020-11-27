@@ -3,6 +3,8 @@ package com.proglab3;
 import com.proglab3.entity.Baby;
 import com.proglab3.entity.Carlson;
 import com.proglab3.impl.ReasonToCry;
+import com.proglab3.misc.Days;
+import com.proglab3.misc.Lessons;
 import com.proglab3.place.Room;
 import com.proglab3.place.School;
 
