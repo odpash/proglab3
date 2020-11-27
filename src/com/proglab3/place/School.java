@@ -1,7 +1,6 @@
 package com.proglab3.place;
 
 import com.proglab3.impl.InstanceChecker;
-import com.proglab3.WordCase;
 
 public class School extends Place implements InstanceChecker {
 
@@ -29,25 +28,5 @@ public class School extends Place implements InstanceChecker {
     @Override
     public String getName() {
         return "школа";
-    }
-
-    @Override
-    public String decline(WordCase wordCase) {
-        switch (wordCase) {
-            case GENITIVE:
-                return "школы";
-            case ACCUSATIVE:
-                return "школу";
-            case DATIVE:
-            case PREPOSITIONAL:
-                return "школе";
-            case INSTRUMENTAL:
-                return "школой";
-            default:
-                return getName();
-        }
-    }
-
-    public class A {
     }
 }

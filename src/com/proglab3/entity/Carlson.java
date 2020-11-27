@@ -1,7 +1,7 @@
 package com.proglab3.entity;
 
 import com.proglab3.impl.InstanceChecker;
-import com.proglab3.WordCase;
+import java.util.Objects;
 
 public class Carlson extends Entity implements InstanceChecker {
 
@@ -39,26 +39,20 @@ public class Carlson extends Entity implements InstanceChecker {
     }
 
     @Override
-    public String decline(WordCase wordCase) {
-        switch (wordCase) {
-            case GENITIVE:
-            case ACCUSATIVE:
-                return "Карлсона";
-            case DATIVE:
-                return "Карлсону";
-            case INSTRUMENTAL:
-                return "Карлсоном";
-            case PREPOSITIONAL:
-                return "Карлсоне";
-            default:
-                return getName();
-        }
+    public String toString() {
+        return getName();
     }
 
     @Override
-    public String toString() {
-        return "Carlson{" +
-                "isHere=" + isHere +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carlson carlson = (Carlson) o;
+        return isHere == carlson.isHere;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isHere);
     }
 }

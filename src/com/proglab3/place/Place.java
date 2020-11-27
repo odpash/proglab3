@@ -1,9 +1,8 @@
 package com.proglab3.place;
 
-import com.proglab3.impl.Declinable;
 import com.proglab3.entity.Entity;
 
-public abstract class Place implements Declinable {
+public abstract class Place {
     protected Entity owner;
 
     public Entity getOwner() {
