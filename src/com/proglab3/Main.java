@@ -18,7 +18,7 @@ public class Main {
         Roof roof = new Roof(baby);
 
         Carlson carlson = new Carlson();
-        carlson.setPlace(roof);
+        //carlson.setPlace(roof);
         
         Room room = new Room(baby);
         baby.run(room);
