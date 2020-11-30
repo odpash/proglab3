@@ -32,12 +32,12 @@ public class Room extends Place {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return Objects.equals(window, room.window);
+        return window.equals(room.getWindow()) && owner.equals(room.getOwner());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(window);
+        return Objects.hash(window, owner);
     }
 
     @Override
