@@ -1,16 +1,18 @@
 package com.proglab3.entity;
 
-import com.proglab3.impl.Cryable;
+import com.proglab3.impl.CryableAbout;
+import com.proglab3.impl.OnCarlsonPlaceChangedListener;
 import com.proglab3.misc.CryVolume;
 import com.proglab3.place.Place;
 import com.proglab3.place.Room;
 
 import java.util.Objects;
 
-public class Baby extends Entity implements Cryable {
+public class Baby extends Entity implements CryableAbout, OnCarlsonPlaceChangedListener {
 
     private CryVolume cryVolume = CryVolume.QUITE;
-    private boolean criesAfterCovering = true;
+    private Carlson carlson;
+    private boolean carlsonIsNear;
 
     public void run(Place place) {
         System.out.print(getName() + " помчался в ");
@@ -26,27 +28,20 @@ public class Baby extends Entity implements Cryable {
         System.out.println(getName() + " распахнул " + room.getWindow().toString());
     }
 
-    public void think(boolean fallingAsleep, Entity about) {
-        if (fallingAsleep)
-            System.out.print("Ложась спать, ");
-        System.out.println(getName() + " думал о " + about.getName());
+    public Entity thinksAbout() {
+        if (!carlsonIsNear)
+            return carlson;
+        return null;
     }
 
     @Override
-    public void cry(String reason) {
-        if (criesAfterCovering)
-            System.out.println("Накрышись одеялом, ");
-
-        System.out.print(getName() + " ");
-        if (cryVolume == CryVolume.LOUD)
-            System.out.print("громко плакал");
-        else
-            System.out.print("тихо плакал");
-
-        if (reason != null) {
-            System.out.print(" от мысли, что ");
-            System.out.println(reason);
+    public Entity criesAbout() {
+        if (!carlsonIsNear) {
+            setCryVolume(CryVolume.QUITE);
+            return carlson;
         }
+
+        return null;
     }
 
     @Override
@@ -69,12 +64,26 @@ public class Baby extends Entity implements Cryable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Baby baby = (Baby) o;
-        return place.equals(baby.place) && cryVolume.equals(baby.cryVolume) &&
-                criesAfterCovering == baby.criesAfterCovering;
+        return place.equals(baby.place) && cryVolume.equals(baby.cryVolume)
+                && carlson.equals(baby.carlson) && carlsonIsNear == baby.carlsonIsNear;
+    }
+
+    public CryVolume getCryVolume() {
+        return cryVolume;
+    }
+
+    public void setCryVolume(CryVolume cryVolume) {
+        this.cryVolume = cryVolume;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(place, cryVolume, criesAfterCovering);
+        return Objects.hash(place, cryVolume, carlson, carlsonIsNear);
+    }
+
+    @Override
+    public void onCarlsonPlaceChanged(Carlson carlson, Place place) {
+        this.carlson = carlson;
+        carlsonIsNear = place != null && place.getOwner() == this;
     }
 }
