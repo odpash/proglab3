@@ -2,8 +2,8 @@ package com.proglab3;
 
 import com.proglab3.entity.Baby;
 import com.proglab3.entity.Carlson;
-import com.proglab3.misc.Days;
 import com.proglab3.misc.Lessons;
+import com.proglab3.place.Roof;
 import com.proglab3.place.Room;
 import com.proglab3.place.School;
 
@@ -15,10 +15,12 @@ public class Main {
 
     private static void runIncredibleStory() {
         Baby baby = new Baby();
+        Roof roof = new Roof(baby);
+
         Carlson carlson = new Carlson();
-        carlson.flyAway();
+        carlson.setPlace(roof);
+        
         Room room = new Room(baby);
-        //room.setOwner(carlson);
         baby.run(room);
 
         if (!room.getWindow().isOpened())
@@ -31,10 +33,7 @@ public class Main {
         School school = new School();
         Lessons lessons = new Lessons();
 
-        Days.go();
-        // school.burn();
         school.printInstance();
-        // lessons.cancel();
         lessons.printInstance();
         carlson.printInstance();
     }

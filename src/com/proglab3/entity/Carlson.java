@@ -1,29 +1,24 @@
 package com.proglab3.entity;
 
 import com.proglab3.impl.InstanceChecker;
+import com.proglab3.place.Roof;
 
 import java.util.Objects;
 
 public class Carlson extends Entity implements InstanceChecker {
-
-    private boolean isAway = true;
 
     @Override
     public boolean canFly() {
         return true;
     }
 
-    public void flyAway() {
-        isAway = true;
-    }
-
-    public void comeBack() {
-        isAway = false;
+    private boolean isOnBabysRoof(){
+        return getPlace() instanceof Roof && getPlace().getOwner() instanceof Baby;
     }
 
     @Override
     public boolean exists() {
-        return !isAway;
+        return isOnBabysRoof();
     }
 
     @Override
@@ -49,11 +44,11 @@ public class Carlson extends Entity implements InstanceChecker {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Carlson carlson = (Carlson) o;
-        return isAway == carlson.isAway;
+        return place.equals(carlson.place);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isAway);
+        return Objects.hash(place);
     }
 }
