@@ -19,6 +19,7 @@ public class Main {
         Roof roof = new Roof(baby);
 
         Carlson carlson = new Carlson();
+        carlson.setBaby(baby);
         carlson.setOnPlaceChangedListener(baby);
         carlson.setPlace(roof);
 

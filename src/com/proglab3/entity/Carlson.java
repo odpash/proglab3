@@ -22,8 +22,6 @@ public class Carlson extends Entity implements InstanceChecker {
 
     public void setOnPlaceChangedListener(OnCarlsonPlaceChangedListener onPlaceChanged) {
         this.onPlaceChanged = onPlaceChanged;
-        if (onPlaceChanged instanceof Baby)
-            setBaby((Baby) onPlaceChanged);
     }
 
     @Override
