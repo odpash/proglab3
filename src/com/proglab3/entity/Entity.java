@@ -7,8 +7,6 @@ public abstract class Entity {
 
     public abstract String getName();
 
-    public abstract boolean canFly();
-
     public Place getPlace() {
         return place;
     }
